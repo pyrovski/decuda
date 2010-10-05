@@ -130,7 +130,7 @@ class mem:
         return
     def output(self,f):
         for i in range(0,len(self.data),4):
-            datastrs = ["0x%08x"%x for x in self.data[i:i+4]]
+            datastrs = ["0x%08x"%(x & 0xFFFFFFFF) for x in self.data[i:i+4]]
             f.write("%s%s\n"%(self.tabs," ".join(datastrs)))
         return
     def hex_output(self,f):
