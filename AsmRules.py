@@ -471,6 +471,11 @@ rules = [
     (DST1, i_oreg(_s.X), dest_oreg),
     (SRC1, i_s(_s.X),   [(BF_OPER5, SRC1, VALUE_ALIGN)] + offset_bits(SRC1)), 
 ]),
+# from shared to a register, alternate
+("lds", 2, wide_op(0x12) + [(BF_SUBSUBOP, SRC1, SHTYPE)] + pred_out + pred_in + psize_width(DST1), [
+    (DST1, i_oreg(_s.X), dest_oreg),
+    (SRC1, i_s(_s.X),   [(BF_OPER5, SRC1, VALUE_ALIGN)] + offset_bits(SRC1)), 
+]),
 # from register to shared
 # psize is used for source operand only
 ("mov", 2, wide_op(0x07) + pred_out + pred_in + psize_width(SRC1), [
