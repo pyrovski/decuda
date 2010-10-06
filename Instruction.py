@@ -37,6 +37,7 @@ class DecodeError(Exception):
         self.message = message
 
 mask_cache = {}
+# @todo this can be replaced by log2(x & -x) + 1
 def mask_to_shift(x):
     """
     Shift right the mask until the lowest bit reaches bit 0. Cache results
