@@ -401,7 +401,7 @@ class Instruction(object):
                     # half instruction, upper bit is segment
                     value = self.bits(0,0x001F0000)
                 else:
-                    value = self.bits(0,0x007F0000)
+                    value = self.bits(0,0x003F0000)
             
             if opt_imm and self.fullinst and self.bits(1,0x00100000):
                 # Operand 3 is immediate
