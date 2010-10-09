@@ -19,6 +19,8 @@ do
 			cat $cubin | nv50dis -n > $nv
 			cuo=$(echo $i | sed -e 's/ptx/cuobjdump/').$o
 			cuobjdump -sass $cubin > $cuo
+			re=$(echo $i | sed -e 's/ptx/asm/').$o
+			$cudasm -o $re $dc
 		fi
 	done
 done
