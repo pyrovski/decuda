@@ -31,3 +31,6 @@ all: $(dis)
 
 %.cuobjdump:%.cubin
 	cuobjdump -sass $^ > $@
+
+clean:
+	rm -f $(ptx) $(dis) $(cubin)
