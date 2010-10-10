@@ -12,7 +12,7 @@ cuobjdump=$(cubin:.cubin=.cuobjdump)
 
 dis=$(decuda) $(nv50dis) $(cuobjdump)
 
-all: $(dis) 
+all: $(dis) $(cubin) $(ptx)
 
 %.ptx:%.cu
 	$(nvcc) $^ -o $@ -ptx
@@ -27,7 +27,7 @@ all: $(dis)
 	decuda.py -o $@ $^
 
 %.nv50dis:%.cubin
-	cat $^ | nv50dis -n > $@
+	cat $^| grep 0x | nv50dis -n > $@
 
 %.cuobjdump:%.cubin
 	cuobjdump -sass $^ > $@
