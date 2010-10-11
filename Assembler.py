@@ -105,6 +105,7 @@ def assemble(i):
                 try:
                     obj = operands[arg]
                 except LookupError:
+                    # error: mad24.lo.u32.u16.u16 $r1, $r0.lo, 0x0004// (No operand 4 in this instruction)
                     raise ValueError("Missing required argument")
                 if match_type(type, obj):
                     mods += bits
