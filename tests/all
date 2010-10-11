@@ -1,0 +1,27 @@
+#!/bin/bash
+ptxas=/usr/local/cuda2.3/bin/ptxas
+decuda=../decuda.py
+cudasm=../cudasm.py
+files='*.ptx'
+#for ptx in $ptxas
+#do
+for i in $files
+do
+	for o in O1 O2
+	do
+		cubin=$(echo $i | sed -e 's/ptx/cubin/').$o
+		$ptxas -o $cubin $i
+		if [ -a $cubin ] 
+		then
+			dc=$(echo $i | sed -e 's/ptx/decuda/').$o
+			$decuda -o $dc $cubin
+			nv=$(echo $i | sed -e 's/ptx/nv50dis/').$o
+			cat $cubin | nv50dis -n > $nv
+			cuo=$(echo $i | sed -e 's/ptx/cuobjdump/').$o
+			cuobjdump -sass $cubin > $cuo
+			re=$(echo $i | sed -e 's/ptx/asm/').$o
+			$cudasm -o $re $dc
+		fi
+	done
+done
+#done
